@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Microscope Calculator</title>
+    </head>
+    <body>
+        <h1>Microscope Specimen Size Calculator</h1>
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul>
+            {% for m in messages %}
+            <li>{{m}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+        <form method="post" enctype="multipart/form-data">
+            <label>Username: <input name="username" /></label><br />
+            <label>Specimen image: <input type="file" name="image" /></label
+            ><br />
+            <label>Measured (mm): <input name="measured" /></label><br />
+            <label
+                >Microscope:
+                <select name="mscope">
+                    {% for name, mag in microscopes %}
+                    <option value="{{mag}}">{{name}} ({{mag}}x)</option>
+                    {% endfor %}
+                </select></label
+            ><br />
+            <label
+                >Output unit:
+                <select name="unit">
+                    <option value="nm">nm</option>
+                    <option value="um">µm</option>
+                    <option value="mm" selected>mm</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                </select></label
+            ><br />
+            <button type="submit">Calculate & Save</button>
+        </form>
+        <p><a href="/history">View History</a></p>
+    </body>
+</html>
